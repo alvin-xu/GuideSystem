@@ -58,18 +58,19 @@ public final class R {
         public static final int CancelButton=0x7f080005;
         public static final int LoginButton=0x7f080003;
         public static final int RegisterButton=0x7f080004;
-        public static final int action_settings=0x7f080033;
+        public static final int action_settings=0x7f080034;
         public static final int autoCompleteTextView1=0x7f080012;
         public static final int baseButton=0x7f080016;
-        public static final int button1=0x7f08002a;
+        public static final int button1=0x7f08002b;
         public static final int button_search=0x7f080013;
         public static final int comment=0x7f080023;
         public static final int comment_lists=0x7f080000;
+        public static final int comments_list=0x7f080025;
         public static final int date=0x7f080024;
         public static final int enterButton=0x7f080006;
-        public static final int image=0x7f08002f;
-        public static final int imageView1=0x7f08002c;
-        public static final int info=0x7f080032;
+        public static final int image=0x7f080030;
+        public static final int imageView1=0x7f08002d;
+        public static final int info=0x7f080033;
         public static final int layout_bottom=0x7f080007;
         public static final int layout_top=0x7f08000e;
         public static final int locationButton=0x7f080019;
@@ -79,9 +80,9 @@ public final class R {
         public static final int mapview=0x7f080015;
         public static final int password=0x7f08001b;
         public static final int phone=0x7f08001a;
-        public static final int popdown=0x7f080027;
-        public static final int popinfo=0x7f080025;
-        public static final int popright=0x7f080028;
+        public static final int popdown=0x7f080028;
+        public static final int popinfo=0x7f080026;
+        public static final int popright=0x7f080029;
         public static final int radio_alert=0x7f08000c;
         public static final int radio_friends=0x7f08000b;
         public static final int radio_maps=0x7f080009;
@@ -89,24 +90,24 @@ public final class R {
         public static final int radio_setting=0x7f08000d;
         public static final int radiogroup=0x7f080008;
         public static final int rank=0x7f080022;
-        public static final int ratingBar1=0x7f08002d;
+        public static final int ratingBar1=0x7f08002e;
         public static final int register=0x7f080020;
         public static final int repassword=0x7f08001c;
         public static final int satelliteButton=0x7f080018;
-        public static final int sceneries=0x7f08002b;
-        public static final int scenery=0x7f080029;
-        public static final int scenery_brief=0x7f08002e;
-        public static final int scenery_name=0x7f080026;
+        public static final int sceneries=0x7f08002c;
+        public static final int scenery=0x7f08002a;
+        public static final int scenery_brief=0x7f08002f;
+        public static final int scenery_name=0x7f080027;
         public static final int searchButton=0x7f080017;
         public static final int tableLayout1=0x7f08000f;
         public static final int tableRow1=0x7f080010;
         public static final int textView1=0x7f080011;
         public static final int tip=0x7f08001f;
-        public static final int title=0x7f080030;
+        public static final int title=0x7f080031;
         public static final int username=0x7f080021;
         public static final int verif_button=0x7f08001e;
         public static final int verifi=0x7f08001d;
-        public static final int view_btn=0x7f080031;
+        public static final int view_btn=0x7f080032;
     }
     public static final class layout {
         public static final int activity_comments=0x7f030000;
@@ -114,10 +115,12 @@ public final class R {
         public static final int activity_main=0x7f030002;
         public static final int activity_map=0x7f030003;
         public static final int activity_register=0x7f030004;
-        public static final int comment_item=0x7f030005;
-        public static final int custom_text_view=0x7f030006;
-        public static final int sceneries_list=0x7f030007;
-        public static final int scenery_item=0x7f030008;
+        public static final int activity_scenery=0x7f030005;
+        public static final int comment_item=0x7f030006;
+        public static final int comments_list=0x7f030007;
+        public static final int custom_text_view=0x7f030008;
+        public static final int sceneries_list=0x7f030009;
+        public static final int scenery_item=0x7f03000a;
     }
     public static final class menu {
         public static final int register=0x7f070000;

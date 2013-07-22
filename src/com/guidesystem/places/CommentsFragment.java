@@ -1,6 +1,5 @@
 package com.guidesystem.places;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,22 +9,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ListActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.SimpleAdapter;
-
 import com.guidesystem.common.Constants;
 import com.guidesystem.login.R;
 import com.guidesystem.net.HttpTask;
 import com.guidesystem.net.ResultCallBack;
 
+import android.app.Fragment;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
-public class Comments extends ListActivity {
+public class CommentsFragment extends Fragment{
+	
+	private View commentsLayout;
+	private ListView commentsList;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		
+		commentsLayout=inflater.inflate(R.layout.comments_list, null);
+		commentsList=(ListView) commentsLayout.findViewById(R.id.comments_list);
 		
 		HashMap<String, String> params=new HashMap<String, String>();
 		params.put("placeNum", "3");
@@ -59,11 +67,11 @@ public class Comments extends ListActivity {
 				} catch (JSONException e) {
 					// TODO: handle exception
 				}
-				SimpleAdapter adapter = new SimpleAdapter(Comments.this,datas,
+				SimpleAdapter adapter = new SimpleAdapter(getActivity(),datas,
 						R.layout.comment_item, new String[] { "username", "rank",
 								"comment", "date" }, new int[] { R.id.username,
 								R.id.rank, R.id.comment, R.id.date });
-				Comments.this.setListAdapter(adapter);
+				commentsList.setAdapter(adapter);
 			}
 			
 			@Override
@@ -75,6 +83,7 @@ public class Comments extends ListActivity {
 		
 		commentTask.execute("get comments");
 		
+		return commentsLayout;
 	}
-
+	
 }

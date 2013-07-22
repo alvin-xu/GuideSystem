@@ -3,6 +3,7 @@ package com.guidesystem;
 import com.guidesystem.login.R;
 import com.guidesystem.map.GuideMap;
 import com.guidesystem.places.Sceneries;
+import com.guidesystem.places.SceneryActivity;
 
 import android.os.Bundle;
 import android.app.TabActivity;
@@ -24,7 +25,7 @@ public class MainActivity extends TabActivity {
 		setContentView(R.layout.activity_main);
 		tabHost=getTabHost();
 		tabHost.addTab(tabHost.newTabSpec("map").setIndicator("Map").setContent(new Intent(this, GuideMap.class)));
-		tabHost.addTab(tabHost.newTabSpec("scenery").setIndicator("Scenery").setContent(new Intent(this, Sceneries.class)));
+		tabHost.addTab(tabHost.newTabSpec("scenery").setIndicator("Scenery").setContent(new Intent(this, SceneryActivity.class)));
 		radioGroup=(RadioGroup) findViewById(R.id.radiogroup);
 		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			

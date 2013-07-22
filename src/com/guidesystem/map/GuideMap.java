@@ -170,7 +170,7 @@ public class GuideMap extends Activity{
 			}
 		});
 		
-		mapView.regMapViewListener(mapManager, new MKMapViewListener() {
+		/*mapView.regMapViewListener(mapManager, new MKMapViewListener() {
 			
 			@Override
 			public void onMapMoveFinish() {
@@ -214,7 +214,7 @@ public class GuideMap extends Activity{
 				}  
 				pop.showPopup(bmps, poi.geoPt, 32);
 			}
-		});
+		});*/
 	}
 	
 	public void initSceneryOverlays(){
