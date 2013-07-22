@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="20dip"
+    android:background="#FFFFFF"
+    >
+    <TableLayout 
+        android:shrinkColumns="0"
+        android:stretchColumns="0"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                >
+            	<TextView
+        		    android:layout_width="fill_parent"
+        		    android:layout_height="wrap_content"
+        		    android:textSize="15dip"
+        		    android:text="用户名:"/>
+        		<EditText android:id="@+id/login_username"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                />
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+        		android:layout_width="match_parent"
+        		android:layout_height="match_parent"
+        		android:textSize="15dip"
+        		android:text="  "/>
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                >
+            	<TextView
+        		    android:layout_width="fill_parent"
+        		    android:layout_height="wrap_content"
+        		    android:textSize="15dip"
+        		    android:text="密码:"/>
+        		<EditText android:id="@+id/login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                />
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+        		android:layout_width="match_parent"
+        		android:layout_height="match_parent"
+        		android:textSize="15dip"
+        		android:text="  "/>
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <Button android:id="@+id/LoginButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Login"
+                />
+                <Button android:id="@+id/RegisterButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Register"
+                />
+                <Button android:id="@+id/CancelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Cancel"
+                />
+            </LinearLayout>
+        </TableRow>
+        <TableRow 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button android:id="@+id/enterButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter"/>
+        </TableRow>
+
+"
+    </TableLayout>
+    
+</LinearLayout>

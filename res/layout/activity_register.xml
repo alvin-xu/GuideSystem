@@ -1,0 +1,56 @@
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" 
+            android:padding="10dip">
+
+            <TableRow>
+                <TextView android:text="@string/phone_number" />
+
+                <EditText
+                    android:id="@+id/phone"
+                    android:inputType="phone">
+                    <requestFocus />
+                </EditText>
+             
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="@string/password" />
+                <EditText 
+                    android:id="@+id/password"
+                    android:inputType="textPassword"/>
+            </TableRow>
+             <TableRow>
+                <TextView android:text="@string/repassword" />
+                <EditText 
+                    android:id="@+id/repassword"
+                    android:inputType="textPassword"/>
+            </TableRow>
+             <TableRow>
+                <TextView android:text="@string/verification" />
+                <EditText 
+                    android:id="@+id/verifi"
+                    android:inputType="text"/>
+                <Button 
+                    android:id="@+id/verif_button"
+                    android:text="@string/getVerif"/>
+            </TableRow>
+
+             <CheckBox
+                 android:id="@+id/tip"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/tip" />
+             <Button 
+                 android:id="@+id/register"
+                 android:text="@string/register"/>
+
+        </TableLayout>
+</ScrollView>
