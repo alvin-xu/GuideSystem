@@ -15,13 +15,18 @@ import com.guidesystem.net.HttpTask;
 import com.guidesystem.net.ResultCallBack;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class Sceneries extends Activity {
 	private ListView listView;
-
+	private List<Map<String, Object>> datas;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -38,7 +43,7 @@ public class Sceneries extends Activity {
 			@Override
 			public void onSuccess(JSONObject result) {
 				// TODO Auto-generated method stub
-				List<Map<String, Object>> datas = new ArrayList<Map<String, Object>>();
+				 datas= new ArrayList<Map<String, Object>>();
 
 				try {
 					JSONArray jsons = result.getJSONArray("sceneries");
@@ -52,7 +57,6 @@ public class Sceneries extends Activity {
 						datas.add(data);
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				SimpleAdapter adapter = new SimpleAdapter(Sceneries.this,
@@ -64,12 +68,26 @@ public class Sceneries extends Activity {
 
 			@Override
 			public void onFail(JSONObject result) {
-				// TODO Auto-generated method stub
 
 			}
 		}, params);
 
 		sceneryTask.execute("");
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				HashMap<String, String> map=(HashMap<String, String>) listView.getItemAtPosition(position);
+				String sceneryId=map.get("scenery_score");
+				Log.d("scenery", sceneryId);
+				Intent i=new Intent(Sceneries.this, SceneryDetail.class);
+				i.putExtra("sceneryId", sceneryId);
+				startActivity(i);
+			}
+			
+		});
 	}
 
 }
