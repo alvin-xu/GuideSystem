@@ -18,7 +18,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
+ 
 public class SceneryDetail extends Activity{
 	TextView nameView;
 	TextView commentNums;
@@ -34,36 +34,35 @@ public class SceneryDetail extends Activity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scenery_detail);
 		
-		initViews();
+		initViews(); 
 		
 		Map<String, String> params=new HashMap<String, String>();
-//		Intent i=getIntent();
-//		Log.d("scenery", i.getStringExtra("sceneryId"));
+		Intent i=getIntent();
+		Log.d("scenery", i.getStringExtra("sceneryId"));
 		params.put("id", ""+3);
 		
 		HttpTask sceneryTask=new HttpTask(Constants.URL+"/scenery/scenery_detail", new ResultCallBack() {
 			
 			@Override
 			public void onSuccess(JSONObject result) {
-				// TODO Auto-generated method stub
-//				scenery\.name,scenery\.address,scenery\.description,
-//				scenery\.playTime,scenery\.businessHour,
-//				scenery\.ticket,scenery\.evalNum,scenery\.score
 				try {
-					Log.d("scenery",result.getString("name"));
-					nameView.setText(result.getString("name"));
-					commentNums.setText(result.getInt("evalNum"));
-					openTime.setText(result.getString("businessHour"));
-					stayTime.setText(result.getString("playTime"));
-					ticket.setText(result.getString("ticket"));
-					scenery_brief.setText(result.getString("description"));
-					rankBar.setRating((float) result.getDouble("score"));
+					JSONObject scenery=result.getJSONObject("scenery");
+					
+					Log.d("scenery",scenery.getString("name"));
+					Log.d("scenery",scenery.getString("evalNum"));
+					
+					nameView.setText(scenery.getString("name"));
+					commentNums.setText("评价人数："+scenery.getString("evalNum"));
+					openTime.setText("开放时间："+scenery.getString("businessHour"));
+					stayTime.setText("建议游玩时间："+scenery.getString("playTime"));
+					ticket.setText("票价："+scenery.getString("ticket"));
+					scenery_brief.setText(scenery.getString("description"));
+					rankBar.setRating((float) scenery.getDouble("score"));
+					
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

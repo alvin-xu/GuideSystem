@@ -33,6 +33,8 @@ public class Sceneries extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sceneries_list);
 		listView = (ListView) findViewById(R.id.sceneries);
+		listView.setClickable(true);
+//		listView.setFocusable(true);
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("id", "" + 9);
@@ -79,9 +81,12 @@ public class Sceneries extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				HashMap<String, String> map=(HashMap<String, String>) listView.getItemAtPosition(position);
-				String sceneryId=map.get("scenery_score");
+//				HashMap<String, String> map=(HashMap<String, String>) listView.getItemAtPosition(position);
+				datas.get(position).get("scenery_name");
+				String sceneryId=(String) datas.get(position).get("scenery_name");
+				
 				Log.d("scenery", sceneryId);
+				
 				Intent i=new Intent(Sceneries.this, SceneryDetail.class);
 				i.putExtra("sceneryId", sceneryId);
 				startActivity(i);

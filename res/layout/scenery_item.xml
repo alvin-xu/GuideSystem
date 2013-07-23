@@ -3,7 +3,8 @@
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
-    android:background="@drawable/itembackground">
+    android:background="@drawable/itembackground"
+    android:descendantFocusability="blocksDescendants">
 
     <ImageView
         android:id="@+id/imageView1"
@@ -41,6 +42,7 @@
                 android:numStars="5"
                 android:rating="3.6" 
                 android:layout_marginLeft="16dp"
+                android:focusable="false"
                 />
 
         </LinearLayout>
