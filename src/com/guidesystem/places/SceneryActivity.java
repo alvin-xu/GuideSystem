@@ -3,7 +3,9 @@ package com.guidesystem.places;
 import com.guidesystem.login.R;
 
 import android.app.TabActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.widget.TabHost;
@@ -27,10 +29,18 @@ public class SceneryActivity extends TabActivity{
 		tabHost=getTabHost();
 		
 		LayoutInflater.from(this).inflate(R.layout.activity_scenery, tabHost.getTabContentView(), true);
-		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("kk",getResources().getDrawable(R.drawable.alert)).setContent(R.id.tab1));
-		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("yy",getResources().getDrawable(R.drawable.alert)).setContent(R.id.tab2));
-		tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator("zz",getResources().getDrawable(R.drawable.alert)).setContent(R.id.tab3));
-//		
+		
+		Intent detail=new Intent(this, SceneryDetail.class);
+		Intent comment=new Intent(this, Comments.class);
+		
+		detail.putExtra("sceneryId", getIntent().getStringExtra("sceneryId"));
+		comment.putExtra("sceneryId", getIntent().getStringExtra("sceneryId"));
+		
+		Log.d("scenery",getIntent().getStringExtra("sceneryId"));
+		
+		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("kk",getResources().getDrawable(R.drawable.alert)).setContent(detail));
+		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("yy",getResources().getDrawable(R.drawable.alert)).setContent(comment));
+		
 //		final ActionBar actionBar=getActionBar();
 //		if(actionBar==null) Log.d("error", "actionBar==null");
 //		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

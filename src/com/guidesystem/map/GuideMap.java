@@ -64,7 +64,7 @@ public class GuideMap extends Activity{
 	private OverlayItem currentItem = null;
 	private SceneryOverlay sOverlay=null;
 	
-	private OverlayItem[] sceneryItems;
+	private static OverlayItem[] sceneryItems;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +94,10 @@ public class GuideMap extends Activity{
 		mapController.enableClick(true);
 		
 		//初始化定位类
-		myLocation=new MyLocation(this, mapView);
+//		myLocation=new MyLocation(this, mapView);
 		
 		initSceneryOverlays();
+		Log.d("life", "oncreate");
 	}
 	@Override  
 	protected void onDestroy(){  
@@ -105,6 +106,7 @@ public class GuideMap extends Activity{
 	                mapManager.destroy();  
 	                mapManager=null;  
 	        }  
+	        Log.d("life", "ondestroy");
 	        super.onDestroy();  
 	}  
 	@Override  
@@ -113,6 +115,7 @@ public class GuideMap extends Activity{
 	        if(mapManager!=null){  
 	               mapManager.stop();  
 	        }  
+	        Log.d("life", "onpause");
 	        super.onPause();  
 	}  
 	@Override  
@@ -120,7 +123,18 @@ public class GuideMap extends Activity{
 	        mapView.onResume();  
 	        if(mapManager!=null){  
 	                mapManager.start();  
-	        }  
+	        }
+	        Log.d("life", "onresume");
+	        
+	        for(int i=0;i<Constants.SCE_NUM;i++){
+	        	if(Constants.selectedFlag[i]==1){
+	        		sceneryItems[i].setMarker(getResources().getDrawable(R.drawable.nav_turn_via_1));
+	        	}else if(Constants.selectedFlag[i]==0){
+	        		sceneryItems[i].setMarker(getResources().getDrawable(R.drawable.icon_gcoding));
+	        	}
+	        	sOverlay.updateItem(sceneryItems[i]);
+	        }
+	        mapView.refresh();
 	       super.onResume();  
 	}  
 	
@@ -243,6 +257,9 @@ public class GuideMap extends Activity{
 					Toast.makeText(GuideMap.this, "one", Toast.LENGTH_SHORT).show();
 				}else if(index==1){
 					Toast.makeText(GuideMap.this, "two", Toast.LENGTH_SHORT).show();
+					currentItem.setMarker(getResources().getDrawable(R.drawable.nav_turn_via_1));
+					sOverlay.updateItem(currentItem);
+					mapView.refresh();
 				}
 			}
 		});
@@ -351,7 +368,11 @@ public class GuideMap extends Activity{
 			pop.showPopup(bitMaps,currentItem.getPoint(),32);
 			return true;
 		}
-		
-		
 	}
+//	public  void refreshMarker(String name){
+//		for(int i=0;i<Constants.SCE_NUM;i++){
+//			if(sceneryItems[i].getTitle().equals(name)){
+//			}
+//		}
+//	}
 }

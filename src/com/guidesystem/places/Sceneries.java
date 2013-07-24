@@ -37,7 +37,7 @@ public class Sceneries extends Activity {
 //		listView.setFocusable(true);
 		
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("id", "" + 9);
+//		params.put("id", "" + 9);
 
 		HttpTask sceneryTask = new HttpTask(Constants.URL
 				+ "/scenery/showSceneries", new ResultCallBack() {
@@ -52,9 +52,9 @@ public class Sceneries extends Activity {
 					for (int i = 0; i < jsons.length(); i++) {
 						JSONObject object = jsons.getJSONObject(i);
 						Map<String, Object> data = new HashMap<String, Object>();
+						data.put("scenery_id", object.get("viewNo"));
 						data.put("scenery_name", object.get("name"));
 						data.put("scenery_score", object.get("score"));
-						data.put("scenery_evals", object.get("evalNum"));
 						data.put("scenery_brief", object.get("description"));
 						datas.add(data);
 					}
@@ -82,12 +82,11 @@ public class Sceneries extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 //				HashMap<String, String> map=(HashMap<String, String>) listView.getItemAtPosition(position);
-				datas.get(position).get("scenery_name");
-				String sceneryId=(String) datas.get(position).get("scenery_name");
+				String sceneryId=(String) datas.get(position).get("scenery_id");
 				
 				Log.d("scenery", sceneryId);
 				
-				Intent i=new Intent(Sceneries.this, SceneryDetail.class);
+				Intent i=new Intent(Sceneries.this, SceneryActivity.class);
 				i.putExtra("sceneryId", sceneryId);
 				startActivity(i);
 			}

@@ -28,7 +28,7 @@ public class Comments extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
 		HashMap<String, String> params=new HashMap<String, String>();
-		params.put("placeNum", "3");
+		params.put("viewNo",getIntent().getStringExtra("sceneryId"));
 		
 		HttpTask commentTask=new HttpTask(Constants.URL+"/scenery/getComments.action", new ResultCallBack() {
 			

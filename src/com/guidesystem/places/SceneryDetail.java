@@ -15,6 +15,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class SceneryDetail extends Activity{
 	
 	Button addButton;
 	Button commentButton;
+	Map<String, String> params;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,10 @@ public class SceneryDetail extends Activity{
 		
 		initViews(); 
 		
-		Map<String, String> params=new HashMap<String, String>();
+		params=new HashMap<String, String>();
 		Intent i=getIntent();
-		Log.d("scenery", i.getStringExtra("sceneryId"));
-		params.put("id", ""+3);
+		Log.d("scenery","detail"+i.getStringExtra("sceneryId"));
+		params.put("viewNo", i.getStringExtra("sceneryId"));
 		
 		HttpTask sceneryTask=new HttpTask(Constants.URL+"/scenery/scenery_detail", new ResultCallBack() {
 			
@@ -89,6 +92,44 @@ public class SceneryDetail extends Activity{
 		
 		addButton=(Button) findViewById(R.id.add_button);
 		commentButton=(Button) findViewById(R.id.comment_button);
+		
+		commentButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i=new Intent(SceneryDetail.this,CommentAdd.class);
+				SceneryDetail.this.startActivity(i);
+			}
+		});
+		addButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				params.put("userName", "xbb");
+				
+				HttpTask addTask=new HttpTask(Constants.URL+"/scenery/checkScenery", new ResultCallBack() {
+					
+					@Override
+					public void onSuccess(JSONObject result) {
+						// TODO Auto-generated method stub
+						Log.d("scenery", "add scenery success");
+						for(int i=0;i<Constants.SCE_NUM;i++){
+							if(Constants.SCENERIES[i].equals(nameView.getText().toString())){
+								Constants.selectedFlag[i]=1;
+							}
+						}
+					}
+					
+					@Override
+					public void onFail(JSONObject result) {
+						// TODO Auto-generated method stub
+						
+					}
+				}, params);
+			}
+		});
 	}
 	
 }
