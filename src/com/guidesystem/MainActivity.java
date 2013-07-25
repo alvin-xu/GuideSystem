@@ -3,7 +3,6 @@ package com.guidesystem;
 import com.guidesystem.login.R;
 import com.guidesystem.map.GuideMap;
 import com.guidesystem.places.Sceneries;
-import com.guidesystem.places.SceneryActivity;
 
 import android.os.Bundle;
 import android.app.TabActivity;
@@ -13,12 +12,12 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TabHost;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
 
 	private TabHost tabHost;
 	private RadioGroup radioGroup;
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

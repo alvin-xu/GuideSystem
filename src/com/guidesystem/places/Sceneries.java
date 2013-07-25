@@ -1,5 +1,7 @@
 package com.guidesystem.places;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,29 +18,66 @@ import com.guidesystem.net.ResultCallBack;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
+import android.widget.SimpleAdapter.ViewBinder;
 
 public class Sceneries extends Activity {
 	private ListView listView;
 	private List<Map<String, Object>> datas;
+	private Button refreshButton;
+	Map<String, String> params;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sceneries_list);
 		listView = (ListView) findViewById(R.id.sceneries);
 		listView.setClickable(true);
-//		listView.setFocusable(true);
+		refreshButton=(Button) findViewById(R.id.refresh_button);
 		
-		Map<String, String> params = new HashMap<String, String>();
-//		params.put("id", "" + 9);
+		params= new HashMap<String, String>();
+		params.put("userName", "xbb");
+		
+		getSceneries();
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				String sceneryId=(String) datas.get(position).get("scenery_id");
+				
+				Log.d("scenery", sceneryId);
+				
+				Intent i=new Intent(Sceneries.this, SceneryActivity.class);
+				i.putExtra("sceneryId", sceneryId);
+				startActivity(i);
+			}
+			
+		});
+		
+		refreshButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				getSceneries();
+			}
+		});
+	}
+	
+	public void getSceneries(){
 		HttpTask sceneryTask = new HttpTask(Constants.URL
 				+ "/scenery/showSceneries", new ResultCallBack() {
 
@@ -56,6 +95,7 @@ public class Sceneries extends Activity {
 						data.put("scenery_name", object.get("name"));
 						data.put("scenery_score", object.get("score"));
 						data.put("scenery_brief", object.get("description"));
+						data.put("scenery_image", object.get("viewNo"));
 						datas.add(data);
 					}
 				} catch (JSONException e) {
@@ -63,8 +103,10 @@ public class Sceneries extends Activity {
 				}
 				SimpleAdapter adapter = new SimpleAdapter(Sceneries.this,
 						datas, R.layout.scenery_item, new String[] {
-								"scenery_name", "scenery_brief" }, new int[] {
-								R.id.scenery_name, R.id.scenery_brief });
+								"scenery_name", "scenery_brief","scenery_score","scenery_image"}, new int[] {
+								R.id.scenery_name, R.id.scenery_brief ,R.id.ratingBar1,R.id.imageView1});
+				adapter.setViewBinder(new MyBinder());
+				
 				listView.setAdapter(adapter);
 			}
 
@@ -75,23 +117,42 @@ public class Sceneries extends Activity {
 		}, params);
 
 		sceneryTask.execute("");
-		
-		listView.setOnItemClickListener(new OnItemClickListener() {
+	}
+	
+	class MyBinder implements ViewBinder{
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
-//				HashMap<String, String> map=(HashMap<String, String>) listView.getItemAtPosition(position);
-				String sceneryId=(String) datas.get(position).get("scenery_id");
+		@Override
+		public boolean setViewValue(View view, Object data,
+				String textRepresentation) {
+			// TODO Auto-generated method stub
+			if(view.getId()==R.id.ratingBar1){
+				//json传的float类型变为double类型了！！！
+				((RatingBar)view).setRating(Float.parseFloat(data.toString()));
+				return true;
+			}else if(view.getId()==R.id.imageView1){
 				
-				Log.d("scenery", sceneryId);
+				Log.d("scenery", data.toString());
 				
-				Intent i=new Intent(Sceneries.this, SceneryActivity.class);
-				i.putExtra("sceneryId", sceneryId);
-				startActivity(i);
+				ImageView imaView=(ImageView)view;
+				try {
+					InputStream in=getResources().getAssets().open(data.toString()+"_0.jpg");
+					if(in!=null){
+						Log.d("scenery", "image is not null"+data.toString());
+						imaView.setImageBitmap(BitmapFactory.decodeStream(in));
+					}else{
+						Log.d("scenery", "image is  null"+data.toString());
+						imaView.setImageBitmap(BitmapFactory.decodeStream(getResources().getAssets().open("zhengchenggong.png")));
+					}
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return true;
 			}
 			
-		});
+			return false;
+		}
+	
 	}
-
 }

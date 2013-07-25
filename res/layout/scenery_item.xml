@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-        android:scaleType="fitCenter"
+        android:scaleType="centerInside"
         android:src="@drawable/zhengchenggong" />
 
     <LinearLayout
@@ -20,10 +20,9 @@
         android:layout_weight="3"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <RelativeLayout 
             android:layout_width="match_parent"
             android:layout_height="22dp" >
-
             <TextView
                 android:id="@+id/scenery_name"
                 android:layout_width="wrap_content"
@@ -31,21 +30,22 @@
                 android:paddingLeft="12dp"
                 android:paddingTop="5dp"
                 android:text="@string/zhengchenggong"
-                android:textColor="#4fcb29" />
+                android:textColor="#4fcb29"
+                android:layout_alignParentLeft="true" />
 
             <RatingBar
                 android:id="@+id/ratingBar1"
                 style="@style/myRatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 android:numStars="5"
-                android:rating="3.6" 
+                android:clickable="false"
                 android:layout_marginLeft="16dp"
                 android:focusable="false"
-                />
-
-        </LinearLayout>
+                android:layout_alignParentRight="true"/>
+            
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/scenery_brief"

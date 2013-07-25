@@ -38,15 +38,9 @@ public class SceneryActivity extends TabActivity{
 		
 		Log.d("scenery",getIntent().getStringExtra("sceneryId"));
 		
-		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("kk",getResources().getDrawable(R.drawable.alert)).setContent(detail));
-		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("yy",getResources().getDrawable(R.drawable.alert)).setContent(comment));
+		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("景点介绍",null).setContent(detail));
+		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("评论",null).setContent(comment));
 		
-//		final ActionBar actionBar=getActionBar();
-//		if(actionBar==null) Log.d("error", "actionBar==null");
-//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//		actionBar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-//		actionBar.addTab(actionBar.newTab().setText("景点").setTabListener(new SceTabListener<SceneriesFragment>(this,SceneriesFragment.class )));
-//		actionBar.addTab(actionBar.newTab().setText("评论").setTabListener(new SceTabListener<CommentsFragment>(this,CommentsFragment.class )));
 	}
 	
 }

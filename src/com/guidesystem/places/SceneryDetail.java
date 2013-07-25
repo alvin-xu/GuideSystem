@@ -99,6 +99,8 @@ public class SceneryDetail extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i=new Intent(SceneryDetail.this,CommentAdd.class);
+				i.putExtra("viewNo", getIntent().getStringExtra("sceneryId"));
+				
 				SceneryDetail.this.startActivity(i);
 			}
 		});
@@ -107,6 +109,8 @@ public class SceneryDetail extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				Log.d("scenery", "addbutton");
+				
 				params.put("userName", "xbb");
 				
 				HttpTask addTask=new HttpTask(Constants.URL+"/scenery/checkScenery", new ResultCallBack() {
@@ -128,6 +132,8 @@ public class SceneryDetail extends Activity{
 						
 					}
 				}, params);
+				
+				addTask.execute("");
 			}
 		});
 	}

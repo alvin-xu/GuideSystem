@@ -48,6 +48,10 @@ public class CommentAdd extends Activity{
 					
 					Map<String, String> params=new HashMap<String, String>();
 					
+					Log.d("comment", "viewNo"+getIntent().getStringExtra("viewNo"));
+					
+					params.put("viewNo",getIntent().getStringExtra("viewNo"));
+					params.put("commentator","xbb");
 					params.put("rank", ""+rank.getRating());
 					params.put("comment", comment.getText().toString());
 					

@@ -9,6 +9,7 @@
     <string name="friends">好友</string>
     <string name="alert">提醒</string>
     <string name="add">加入</string>
+    
 
     <string name="phone_number">手机号：</string>
     <string name="password">密码：</string>
@@ -28,9 +29,11 @@
     <string name="satellite_map">卫星视图</string>
     <string name="search">搜索</string>
     <string name="location">定位</string>
+    <string name="route">生成路线</string>
     
     <string name="comment">评论</string>
     <string name="comment_add">提交</string>
+    <string name="comment_more">加载更多...</string>
     
     <string name="zhengchenggong">郑成功雕像</string>
     <string name="zhengchenggongintroduce">郑成功（巨型花岗岩）雕像于1985年8月27日郑成功诞辰361周年落成，屹立在鼓浪屿东南端的覆鼎岩。覆鼎岩高24米，三面临海，一面与鼓浪屿接壤。雕像高15.7米，宽9.2米，重1400多吨，由625块白花岗雕凿嵌接而成</string>

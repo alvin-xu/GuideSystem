@@ -27,6 +27,8 @@ import com.guidesystem.common.BMapUtil;
 import com.guidesystem.common.Constants;
 import com.guidesystem.login.R;
 import com.guidesystem.places.Comments;
+import com.guidesystem.places.SceneryActivity;
+import com.guidesystem.places.SceneryDetail;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -54,6 +56,7 @@ public class GuideMap extends Activity{
 	private Button baseButton;
 	private Button satelliteButton;
 	private Button searchButton;
+	private Button routeButton;
 	private AutoCompleteTextView text;
 	
 	private PopupOverlay pop=null;
@@ -64,11 +67,15 @@ public class GuideMap extends Activity{
 	private OverlayItem currentItem = null;
 	private SceneryOverlay sOverlay=null;
 	
+	private SearchPoiOverlay poiOverlay;
+	
 	private static OverlayItem[] sceneryItems;
+	
+	private boolean searched=false;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
 		mapManager=new BMapManager(getApplication());
@@ -82,8 +89,6 @@ public class GuideMap extends Activity{
 		mkSearch.init(mapManager, new MySearchListener());
 		p1=new GeoPoint((int)(24.570404*1E6),(int)(118.063301*1E6));
 		p2=new GeoPoint((int)(24.412036*1E6),(int)(118.209617*1E6));
-//		p1=new GeoPoint((int)(39.901375 * 1E6),(int)(116.329099 * 1E6));
-//		p2=new GeoPoint((int)(39.949404 * 1E6),(int)(116.360719 * 1E6));
 
 		mapView.setBuiltInZoomControls(true);
 		MapController mapController=mapView.getController();
@@ -121,6 +126,7 @@ public class GuideMap extends Activity{
 	@Override  
 	protected void onResume(){  
 	        mapView.onResume();  
+	       
 	        if(mapManager!=null){  
 	                mapManager.start();  
 	        }
@@ -129,19 +135,23 @@ public class GuideMap extends Activity{
 	        for(int i=0;i<Constants.SCE_NUM;i++){
 	        	if(Constants.selectedFlag[i]==1){
 	        		sceneryItems[i].setMarker(getResources().getDrawable(R.drawable.nav_turn_via_1));
-	        	}else if(Constants.selectedFlag[i]==0){
-	        		sceneryItems[i].setMarker(getResources().getDrawable(R.drawable.icon_gcoding));
+	        		sOverlay.updateItem(sceneryItems[i]);
 	        	}
-	        	sOverlay.updateItem(sceneryItems[i]);
+//	        	else if(Constants.selectedFlag[i]==0){
+//	        		sceneryItems[i].setMarker(getResources().getDrawable(R.drawable.icon_gcoding));
+//	        	}
+//	        	sOverlay.updateItem(sceneryItems[i]);
 	        }
 	        mapView.refresh();
 	       super.onResume();  
+	       
 	}  
 	
 	public void setViews(){
 		baseButton=(Button) findViewById(R.id.baseButton);
 		satelliteButton=(Button) findViewById(R.id.satelliteButton);
 		searchButton=(Button)findViewById(R.id.button_search);
+	
 		
 		text=(AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
 		ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,Constants.SCENERIES);
@@ -236,7 +246,7 @@ public class GuideMap extends Activity{
 		sceneryItems=new OverlayItem[Constants.SCE_NUM];
 		
 		for(int i=0;i<Constants.SCE_NUM;i++){
-			sceneryItems[i]=new OverlayItem(new GeoPoint((int)Constants.coordinates[i][0],(int)Constants.coordinates[i][1]), Constants.SCENERIES[i], "");
+			sceneryItems[i]=new OverlayItem(new GeoPoint((int)Constants.coordinates[i][0],(int)Constants.coordinates[i][1]), Constants.SCENERIES[i], ""+i);
 			sOverlay.addItem(sceneryItems[i]);
 		}
 		
@@ -254,9 +264,21 @@ public class GuideMap extends Activity{
 			public void onClickedPopup(int index) {
 				// TODO Auto-generated method stub
 				if(index==0){
-					Toast.makeText(GuideMap.this, "one", Toast.LENGTH_SHORT).show();
+					Toast.makeText(GuideMap.this, "one"+currentItem.getSnippet(), Toast.LENGTH_SHORT).show();
+					
+					int num=Integer.parseInt(currentItem.getSnippet())+1;
+					String sceneryId=null;
+					if(num<10) sceneryId="GL00"+num;
+					else 	sceneryId="GL0"+num;
+					
+					Log.d("map", sceneryId);
+					
+					Intent sceneryDetail=new Intent(GuideMap.this, SceneryActivity.class);
+					sceneryDetail.putExtra("sceneryId",sceneryId);
+					startActivity(sceneryDetail);
+					
 				}else if(index==1){
-					Toast.makeText(GuideMap.this, "two", Toast.LENGTH_SHORT).show();
+					Toast.makeText(GuideMap.this, "two"+currentItem.getSnippet(), Toast.LENGTH_SHORT).show();
 					currentItem.setMarker(getResources().getDrawable(R.drawable.nav_turn_via_1));
 					sOverlay.updateItem(currentItem);
 					mapView.refresh();
@@ -305,17 +327,26 @@ public class GuideMap extends Activity{
 			Toast.makeText(GuideMap.this, "showing the result", Toast.LENGTH_LONG).show();
 			//poi结果显示到图层
 //			PoiOverlay poiOverlay=new PoiOverlay(GuideMap.this, mapView);
-			SearchPoiOverlay poiOverlay=new SearchPoiOverlay(GuideMap.this, mapView,mkSearch);
+			if(searched==true){
+				Log.d("map", "delete befor search");
+				mapView.getOverlays().remove(poiOverlay);
+				
+				searched=false;
+			}
+			poiOverlay=new SearchPoiOverlay(GuideMap.this, mapView,mkSearch);
 			poiOverlay.setData(res.getAllPoi());
-			mapView.getOverlays().clear();
+			
 			mapView.getOverlays().add(poiOverlay);
+			
 			mapView.refresh();
+			
 			for(MKPoiInfo info:res.getAllPoi()){
 				if(info.pt!=null){
 					mapView.getController().animateTo(info.pt);
 					break;
 				}
 			}
+			searched=true;
 		}
 
 		@Override
@@ -369,10 +400,5 @@ public class GuideMap extends Activity{
 			return true;
 		}
 	}
-//	public  void refreshMarker(String name){
-//		for(int i=0;i<Constants.SCE_NUM;i++){
-//			if(sceneryItems[i].getTitle().equals(name)){
-//			}
-//		}
-//	}
+
 }
