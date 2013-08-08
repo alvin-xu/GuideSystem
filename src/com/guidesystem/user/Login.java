@@ -1,4 +1,4 @@
-package com.guidesystem.login;
+package com.guidesystem.user;
 
 
 import java.util.HashMap;
@@ -12,6 +12,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.guidesystem.login.R;
 import com.guidesystem.map.GuideMap;
 import com.guidesystem.net.HttpTask;
 import com.guidesystem.net.ResultCallBack;
@@ -28,14 +29,6 @@ import android.widget.Toast;
 import static com.guidesystem.common.Constants.*;
 
 public class Login extends Activity {
-    /** Called when the activity is first created. */
-	
-//	private static final String url="http://192.168.3.101:8080/JSONServer/json";
-//	
-//	private HttpClient httpClient;
-//	private HttpResponse response;
-//	private HttpPost httpPost;
-//	private HttpEntity entity;
 	
 	private Button loginButton;
 	private Button registerButton;
@@ -52,8 +45,6 @@ public class Login extends Activity {
         
         loginButton=(Button)findViewById(R.id.LoginButton);
     	registerButton=(Button)findViewById(R.id.RegisterButton);
-    	cancelButton=(Button)findViewById(R.id.CancelButton);
-    	enterButton=(Button)findViewById(R.id.enterButton);
     	
     	usernameText=(EditText)findViewById(R.id.login_username);
     	passwordText=(EditText)findViewById(R.id.login_password);

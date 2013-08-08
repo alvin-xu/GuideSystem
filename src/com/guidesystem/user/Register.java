@@ -1,7 +1,9 @@
-package com.guidesystem.login;
+package com.guidesystem.user;
 
 
 import java.util.Random;
+
+import com.guidesystem.login.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -45,8 +47,6 @@ public class Register extends Activity {
 		phone=(EditText)findViewById(R.id.phone);
 		password=(EditText)findViewById(R.id.password);
 		repassword=(EditText)findViewById(R.id.repassword);
-		verification=(EditText)findViewById(R.id.verifi);
-		getVerif=(Button)findViewById(R.id.verif_button);
 		tip=(CheckBox)findViewById(R.id.tip);
 		register=(Button)findViewById(R.id.register);
 	}

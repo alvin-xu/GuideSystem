@@ -92,7 +92,7 @@
 	 	    android:layout_alignBaseline="@+id/baseButton"
 	 	    android:layout_alignBottom="@+id/baseButton"
 	 	    android:layout_alignParentLeft="true"
-	 	    android:text="@string/location" />
+	 	    android:background="@drawable/location" />
 
 	</RelativeLayout>
 

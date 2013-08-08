@@ -3,8 +3,7 @@
  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="horizontal"
 	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    >
+	    android:layout_height="wrap_content">
    
      <LinearLayout
 	    android:layout_width="wrap_content"
@@ -30,9 +29,7 @@
         android:textColor="@android:color/black"
         android:textSize="12sp" />
     
-    
     </LinearLayout>
-
      
     <TextView
         android:id="@+id/popright"
@@ -42,7 +39,7 @@
         android:textColor="#3814ed"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="更新marker"
+        android:text="选择"
         android:textSize="12sp" />
 
 </LinearLayout>

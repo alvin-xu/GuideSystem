@@ -1,7 +1,7 @@
 package com.guidesystem.common;
 
 public interface Constants {
-	public static final String URL = "http://120.35.66.249:55554/TravelGuideServer";
+	public static final String URL = "http://172.16.18.224:55554/TravelGuideServer";
 	public static final String[] SCENERIES = { "日光岩", "八卦楼", "观彩楼", "金瓜楼",
 			"番婆楼", "林语堂故居", "林屋", "黄荣远堂别墅", "皓月园", "厦门海底世界", "毓园",
 			"厦门华侨亚热带植物引种园", "郑成功纪念馆", "钢琴博物馆", "菽庄花园", "世界名人蜡像馆", "港仔后海滨浴场",

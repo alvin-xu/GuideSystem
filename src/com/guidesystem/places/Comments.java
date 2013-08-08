@@ -1,7 +1,6 @@
 package com.guidesystem.places;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,14 +11,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
@@ -76,6 +72,7 @@ public class Comments extends Activity {
 				getComments();
 			}
 		});
+		overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left);
 	}
 	
 	public void getComments(){

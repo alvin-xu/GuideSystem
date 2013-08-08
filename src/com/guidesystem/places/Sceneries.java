@@ -75,6 +75,8 @@ public class Sceneries extends Activity {
 				getSceneries();
 			}
 		});
+		
+		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 	}
 	
 	public void getSceneries(){
